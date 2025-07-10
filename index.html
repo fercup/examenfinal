@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>RAPPICINE</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #efefef;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #141618;
+      color: rgb(199, 11, 11);
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 40px;
+    }
+
+    header img {
+      height: 40px;
+      width: auto;
+      border-radius: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .contenedor {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      margin: 30px 0 10px;
+      text-align: center;
+    }
+
+    /* Estilo de las películas */
+    .grid.peliculas {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .card.pelicula {
+      display: flex;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 800px;
+      transition: transform 0.3s;
+      cursor: pointer;
+      animation: aparecer 0.6s ease-in-out forwards;
+      opacity: 0;
+      padding: 15px;
+      text-align: left;
+    }
+
+    .card.pelicula:hover {
+      transform: scale(1.02);
+    }
+
+    .card.pelicula img {
+      width: 180px;
+      height: 270px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 20px;
+    }
+
+    .card-content {
+      flex: 1;
+    }
+
+    .card-content h3 {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 0 0 10px;
+    }
+
+    .card-content .fecha {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .card-content p {
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    /* Productos */
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      width: 180px;
+      transition: transform 0.3s;
+      cursor: pointer;
+      animation: aparecer 0.6s ease-in-out forwards;
+      opacity: 0;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    #boleta {
+      margin-top: 30px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      display: none;
+      text-align: left;
+    }
+
+    #boleta img {
+      width: 120px;
+      border-radius: 8px;
+    }
+
+    .btn-encuesta {
+      display: inline-block;
+      margin-top: 30px;
+      background-color: #e50914;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    footer {
+      background-color: #e50914;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    footer h4 {
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      margin: 5px 0;
+    }
+
+    .formulario {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      max-width: 700px;
+      margin: 30px auto;
+      text-align: left;
+    }
+
+    .formulario label {
+      display: block;
+      margin: 20px 0 5px;
+    }
+
+    .formulario select,
+    .formulario textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .btn {
+      margin-top: 20px;
+      background-color: #e50914;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .btn-volver {
+      background-color: #444;
+      margin-left: 10px;
+    }
+
+    @keyframes aparecer {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>RappiCine</h1>
+    <nav class="nav-links">
+      <a href="#peliculas">Películas</a>
+      <a href="#productos">Productos</a>
+      <a href="#encuesta">Encuesta</a>
+    </nav>
+    <img src="feb0690f-b599-4451-ab4e-af186353b004.png" alt="Logo Cine">
+  </header>
+
+  <div class="contenedor">
+    <h2 class="section-title">📽️ Películas en cartelera 🤩</h2>
+    <div class="grid peliculas" id="peliculas">
+      <div class="card pelicula" onclick="seleccionarPelicula('Los 4 Fantásticos', 20, 'https://pics.filmaffinity.com/Los_4_Fantaasticos_Primeros_pasos-284761648-large.jpg')">
+        <img src="https://pics.filmaffinity.com/Los_4_Fantaasticos_Primeros_pasos-284761648-large.jpg" alt="Los 4 Fantásticos">
+        <div class="card-content">
+          <h3>LOS 4 FANTÁSTICOS: PRIMEROS PASOS</h3>
+          <div class="fecha">Estreno: 5 de julio de 2025</div>
+          <p>Reed Richards / Sr. Fantástico (Pedro Pascal), Sue Storm / Mujer Invisible (Vanessa Kirby), Johnny Storm / La Antorcha Humana (Joseph Quinn) y 
+            Ben Grimm / La Mole (Ebon Moss-Bachrach) mientras enfrentan su más grande desafío hasta el momento. Obligados a equilibrar sus roles de héroes con la 
+            fuerza de su vínculo familiar, deben defender la Tierra de un voraz dios del espacio llamado Galactus (Ralph Ineson) y su enigmática Heralda, Silver Surfer 
+            (Julia Garner). Y si el plan de Galactus de devorar todo el planeta y a todos los que lo habitan no fuera lo suficientemente malo, de repente se vuelve muy personal.</p>
+        </div>
+      </div>
+
+      <div class="card pelicula" onclick="seleccionarPelicula('Cómo entrenar a tu dragón', 18, 'https://m.media-amazon.com/images/M/MV5BMzEzMTgwNzktYTk4ZC00ZTQ1LTllZGYtNzY4MTk2ZDM1MzA0XkEyXkFqcGc@._V1_.jpg')">
+        <img src="https://m.media-amazon.com/images/M/MV5BMzEzMTgwNzktYTk4ZC00ZTQ1LTllZGYtNzY4MTk2ZDM1MzA0XkEyXkFqcGc@._V1_.jpg" alt="Cómo entrenar a tu dragón">
+        <div class="card-content">
+          <h3>CÓMO ENTRENAR A TU DRAGÓN</h3>
+          <div class="fecha">Estreno: 20 de junio de 2025</div>
+          <p>Hipo, un vikingo adolescente, comienza las clases de entrenamiento con dragones, y 
+            ve por fin una oportunidad para demostrar que es capaz de convertirse en guerrero, cuando hace amistad con un dragón herido.</p>
+        </div>
+      </div>
+
+      <div class="card pelicula" onclick="seleccionarPelicula('Película 3', 22, 'https://m.media-amazon.com/images/M/MV5BMzdkOTQzNTctNzg0OS00ZWJmLThiMGQtMGI0ZGIxOWJjNTdiXkEyXkFqcGc@._V1_.jpg')">
+        <img src="https://m.media-amazon.com/images/M/MV5BMzdkOTQzNTctNzg0OS00ZWJmLThiMGQtMGI0ZGIxOWJjNTdiXkEyXkFqcGc@._V1_.jpg" alt="Película 3">
+        <div class="card-content">
+          <h3>MISIÓN IMPOSIBLE : La Sentencia Final parte 1</h3>
+          <div class="fecha">Estreno: 22 de mayo de 2025</div>
+          <p>"Misión: Imposible - Sentencia Final Parte Uno" sigue a Ethan Hunt y su equipo en una nueva misión
+             peligrosa: evitar que una poderosa arma amenace a la humanidad. Se enfrentan a una IA llamada "La Entidad" que controla el 
+             mundo digital y se ha vuelto contra la humanidad. La película explora temas de control, traición y la lucha contra la tecnología descontrolada. </p>
+        </div>
+      </div>
+
+      <div class="card pelicula" onclick="seleccionarPelicula('Película 4', 19, 'https://m.media-amazon.com/images/M/MV5BMTA2NDc3Njg5NDVeQTJeQWpwZ15BbWU4MDc1NDcxNTUz._V1_.jpg')">
+        <img src="https://m.media-amazon.com/images/M/MV5BMTA2NDc3Njg5NDVeQTJeQWpwZ15BbWU4MDc1NDcxNTUz._V1_.jpg" alt="Película 4">
+        <div class="card-content">
+          <h3>BOHEMIAN RAPSODY: La historia de Freddy Mercury</h3>
+          <div class="fecha">Estreno: 24 de octubre de 2018</div>
+          <p>Freddie Mercury, el cantante principal de Queen, desafía los estereotipos y las convenciones 
+            para convertirse en un artista querido; las canciones populares de la banda conducen al ascenso de Queen en la década de 1970, 
+            resultando en serio una de las bandas más populares del mundo</p>
+        </div>
+      </div>
+
+      <div class="card pelicula" onclick="seleccionarPelicula('Película 5', 21, 'https://files.ekmcdn.com/allwallpapers/images/back-to-the-future-61x91.5cm-movie-poster-39034-p.webp')">
+        <img src="https://files.ekmcdn.com/allwallpapers/images/back-to-the-future-61x91.5cm-movie-poster-39034-p.webp" alt="Película 5">
+        <div class="card-content">
+          <h3>Volver al Futuro</h3>
+          <div class="fecha">Estreno: 3 de julio de 1985</div>
+          <p>El adolescente Marty McFly es amigo de Doc, un científico que ha construido una máquina del tiempo. 
+            Cuando los dos prueban el artefacto, un error fortuito hace que Marty llegue a 1955, año en el que sus padres iban al
+             instituto y todavía no se habían conocido. Después de impedir su primer encuentro, Marty deberá conseguir que se conozcan 
+             y se enamoren, de lo contrario su existencia no sería posible.</p>
+        </div>
+      </div>
+
+      <div class="card pelicula" onclick="seleccionarPelicula('Película 6', 23, 'https://es.web.img3.acsta.net/pictures/23/03/14/15/12/2449709.jpg')">
+        <img src="https://es.web.img3.acsta.net/pictures/23/03/14/15/12/2449709.jpg" alt="Película 6">
+        <div class="card-content">
+          <h3>La sirenita</h3>
+          <div class="fecha">Estreno: 26 de mayo de 2023</div>
+          <p>Narra la historia de Ariel, una joven sirena hija del Rey Tritón, fascinada por el mundo de los humanos y que, a pesar de 
+            las prohibiciones, hace un pacto con la malvada bruja del mar, Úrsula, para poder experimentar la vida en la superficie,
+             renunciando a su voz a cambio de piernas.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">🍟 Elige tus productos 🍦</h2>
+    <div class="grid" id="productos">
+      <div class="card">
+        <img src="https://cdn.apis.cineplanet.com.pe/CDN/media/entity/get/ItemGraphic/3900?allowPlaceHolder=true">
+        <h3>COMBO 2 MIX + VASO T.REX OL</h3>
+        <p>Canchita Gigante Mix + 2 Bebidas (32oz) + 1 vaso Merch T.REX (vaso merch no incluye bebida) *Sabor de bebida sujeto a stock / canchita sin refill</p>
+      </div>
+      <div class="card">
+        <img src="https://cdn.apis.cineplanet.com.pe/CDN/media/entity/get/ItemGraphic/3899?allowPlaceHolder=true">
+        <h3>COMBO 2 DULCE + VASO T.REX OL </h3>
+        <p>Canchita Gigante Dulce + 2 Bebidas (32oz) + 1 vaso Merch T.REX (vaso merch no incluye bebida) *Sabor de bebida sujeto a stock / canchita sin refill</p>
+      </div>
+      <div class="card">
+        <img src="https://cdn.apis.cineplanet.com.pe/CDN/media/entity/get/ItemGraphic/3901?allowPlaceHolder=true">
+        <h3>COMBO 2 SALADO + VASO T.REX OL</h3>
+        <p>Canchita Gigante Salada + 2 Bebidas (32oz) + 1 vaso Merch T.REX (vaso merch no incluye bebida) *Sabor de bebida sujeto a stock / canchita sin refill</p>
+      </div>
+      <div class="card">
+        <img src="https://cdn.apis.cineplanet.com.pe/CDN/media/entity/get/ItemGraphic/2622?allowPlaceHolder=true">
+        <h3>Combo Familiar Salado OL</h3>
+        <p>Canchita Gigante Salada + 4 Bebidas (32oz). *Sabor bebida sujeto a stock / canchita sin refill</p>
+      </div>
+      <div class="card">
+        <img src="https://cdn.apis.cineplanet.com.pe/CDN/media/entity/get/ItemGraphic/1485?allowPlaceHolder=true">
+        <h3>Combo de Película OL CC Dulce</h3>
+        <p>1 Canchita Grande (Dulce) + 2 Bebidas Medianas (21 oz). *Sabor gaseosa sujeto a stock del cine</p>
+      </div>
+      <div class="card">
+        <img src="https://cdn.apis.cineplanet.com.pe/CDN/media/entity/get/ItemGraphic/1484?allowPlaceHolder=true">
+        <h3>Combo 1 OL CC Dulce</h3>
+        <p>Canchita Grande(Dulce) + 1 Bebida (32oz).*Sabor gaseosa sujeto a stock del cine</p>
+      </div>
+    </div>
+
+    <div class="formulario" id="encuesta">
+      <h2>Encuesta de Satisfacción</h2>
+      <form action="ucv.edu.pe" target="_blank">
+
+        <label>1. ¿Qué tan satisfecho estás con la película?</label>
+        <select>
+          <option>Muy satisfecho</option>
+          <option>Satisfecho</option>
+          <option>Regular</option>
+          <option>Insatisfecho</option>
+        </select>
+
+        <label>2. ¿Te gustaron los efectos especiales?</label>
+        <select>
+          <option>Mucho</option>
+          <option>Algo</option>
+          <option>Poco</option>
+          <option>Nada</option>
+        </select>
+
+        <label>3. ¿Cómo calificarías la actuación?</label>
+        <select>
+          <option>Excelente</option>
+          <option>Buena</option>
+          <option>Regular</option>
+          <option>Mala</option>
+        </select>
+
+        <label>4. ¿Recomendarías esta película?</label>
+        <select>
+          <option>Sí</option>
+          <option>No</option>
+        </select>
+
+        <label>5. ¿Te gustaron los productos adquiridos?</label>
+        <select>
+          <option>Sí</option>
+          <option>No</option>
+          <option>No compré</option>
+        </select>
+
+        <label>6. ¿Volverías a ver otra película aquí?</label>
+        <select>
+          <option>Claro que sí</option>
+          <option>Tal vez</option>
+          <option>No</option>
+        </select>
+
+        <label>7. Comentario adicional:</label>
+        <textarea rows="4"></textarea>
+
+        <button class="btn" type="submit">Enviar Encuesta</button>
+        <a href="#" class="btn btn-volver">Volver al Inicio</a>
+
+      </form>
+    </div>
+
+    <footer>
+      <h4>Contacto</h4>
+      <p><strong>Iker Esquia Leonardo</strong> | 📞 987 214 006 | ✉️ ikesquial@ucvvirtual.edu.pe</p>
+      <p><strong>Angel Garcia Cruzado</strong> | 📞 963 835 146 | ✉️ agarciacr@ucvvirtual.edu.pe</p>
+      <p><strong>Allison Castañeda Ramirez</strong> | 📞 983 495 021 | ✉️ acastanedara01@ucvvirtual.edu.pe</p>
+    </footer>
+  </div>
+
+</body>
+</html>
